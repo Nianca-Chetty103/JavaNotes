@@ -8,88 +8,124 @@ package com.mycompany.practise;
  *
  * @author nianc
  */
+
+/*
+* DoublyLinkedList is data structure where the node has three parts:
+- data (stores the value)
+- previous pointer
+- next pointer
+* it tends to move forward and backwards, eaier to to use if constantly inserting and deleting from system.
+* Faster the singlylinkedlist
+* also used for:
+- navigating back and forth
+- undo /redo functionality
+- memory management
+- implementing queues or dequeues
+*/
+
 public class DoublyLinkedList<E> {
     
     private Node<E> header;
     private Node<E> trailer;
     private int size = 0;
     
-    public DoublyLinkedList(){
+    public DoublyLinkedList()
+    {
         header = new Node<>(null, null, null);
         trailer = new Node<>(null, header, null);
         header.setNext(trailer);
     }
-    
-    public int getSize(){
+    public int getSize()
+    {
         return size;
-    }
-    
-    public boolean isEmpty(){
-        if(size == 0 ){
+    } 
+    public boolean isEmpty()
+    {
+        if(size == 0 )
+        {
             return true;
-        }else {
+        }
+        else 
+        {
             return false;
         }
     }
     
-    public E first(){
-        if(isEmpty() == true){
+    public E first()
+    {
+        if(isEmpty() == true)
+        {
             return null;
-        }else
+        }
+        else
         {
             return header.getNext().getElement();
         }
     }
     
-    public E Last(){
-        if(isEmpty()== true){
-            return null;
-            
-        }else {
+    public E Last()
+    {
+        if(isEmpty()== true)
+        {
+            return null;  
+        }
+        else 
+        {
             return trailer.getPrev().getElement();
         }
     }
     
-    public void addFirst(E e){
+    public void addFirst(E e)
+    {
         addBetween(e, header,header.getNext());
         
     }
     
-    public void addlast(E e){
+    public void addlast(E e)
+    {
         addBetween(e, trailer.getPrev(),trailer);
     }
     
-    public E removeFirst(){
-        if(isEmpty()==true){
+    public E removeFirst()
+    {
+        if(isEmpty()==true)
+        {
             return null;
-        }else {
+        }
+        else 
+        {
             return remove(trailer.getPrev());
         }
     }
     
-    public E removeLast(){
-        if(isEmpty()==true){
+    public E removeLast()
+    {
+        if(isEmpty()==true)
+        {
             return null;
-        }else {
+        }
+        else
+        {
             return remove(trailer.getPrev());
         }
     }
     
-    private void addBetween(E e, Node<E> previous , Node<E> next){
+    private void addBetween(E e, Node<E> previous , Node<E> next)
+    {
         Node<E> newest = new Node<>(e, previous,next);
         previous.setNext(newest);
         next.setPrev(newest);
         size++;
     }
     
-    private E remove(Node<E> node){
+    private E remove(Node<E> node)
+    {
         Node<E> previous = node.getPrev();
         Node<E> next = node.getNext();
         previous.setNext(next);
         next.setPrev(previous);
         size--;
-        return node.getElement();
-        
+        return node.getElement();   
     }
     
     private static class Node<E> {
@@ -125,3 +161,4 @@ public class DoublyLinkedList<E> {
         }
     }
 }
+
