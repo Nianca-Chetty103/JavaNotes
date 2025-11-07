@@ -8,6 +8,13 @@ package com.mycompany.practise;
  *
  * @author nianc
  */
+
+/**
+* SinglyLinkedList is data structure made up of nodes, where each node stores data and link / pointer to the next node.
+* It's used to store and organise data in a sequence where you can add and remove things easily without having them shifting in an array.
+* like a simple stack / queue.
+*/
+
 public class SinglyLinkedList<T> {
     private Node<T> head = null;
     private Node<T> tail = null;
@@ -102,4 +109,5 @@ public class SinglyLinkedList<T> {
     }
     
 }
+
 
