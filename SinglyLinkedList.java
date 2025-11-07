@@ -13,7 +13,8 @@ public class SinglyLinkedList<T> {
     private Node<T> tail = null;
     private int size = 0;
     
-    public boolean isEmpty(){
+    public boolean isEmpty()   //Check if the List is Empty
+    { 
         if(size == 0){
             return true;
         }else {
@@ -21,7 +22,8 @@ public class SinglyLinkedList<T> {
         }
     }
     
-    public T first(){
+    public T first()        //Check if the head is there else it will create the first object as the head.
+    {     
         if(isEmpty() == true ){
             return null;
         }else {
@@ -29,7 +31,8 @@ public class SinglyLinkedList<T> {
         }
     }
     
-    public T Last(){
+    public T Last()   //Check where the end of the list is.
+    {
         if(isEmpty()== true){
             return  null;
         }else {
@@ -37,7 +40,8 @@ public class SinglyLinkedList<T> {
         }
     }
     
-    public void addFirst(T t){
+    public void addFirst(T t)  /// Add the head to the list.
+    {
         head = new Node<>(t , head);
         if(isEmpty()==true ){
             tail = head ;
@@ -46,7 +50,8 @@ public class SinglyLinkedList<T> {
         }
     }
     
-    public void addLast(T t){
+    public void addLast(T t)   ///Ensuring it knows which object is the tail / last.
+    {
         Node<T> newest = new Node<>(t,null);
         if(isEmpty()==true){
             head = newest;
@@ -57,7 +62,8 @@ public class SinglyLinkedList<T> {
         size++;
     }
     
-    public T removeFirst(){
+    public T removeFirst()  //once use the first object it may reassign another one as the head
+    {
         if(isEmpty() == true){
             return null;
         }else {
@@ -65,18 +71,15 @@ public class SinglyLinkedList<T> {
             head = head.getNext();
             size--;
           
-        
-        
-        if(isEmpty()== true ){
+            if(isEmpty()== true ){
             tail = null;
-        }
-
-          
+        }  
         return answer; 
         }
     }
-    public static class Node<T> {
-        
+    
+    public static class Node<T> //Node class
+    {     
         private T element ;
         private Node<T> next;
         
@@ -99,3 +102,4 @@ public class SinglyLinkedList<T> {
     }
     
 }
+
