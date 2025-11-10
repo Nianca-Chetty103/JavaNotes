@@ -8,6 +8,9 @@ package insurancemanagemnetsystem;
  *
  * @author nianc
  */
+
+// Type of Recursion method of programming
+
 public class Factorial {
     
     public static int factorial(int n ) throws IllegalArgumentException{
@@ -18,7 +21,8 @@ public class Factorial {
             return 1;
             
         }else {
-            return n* factorial(n-1);
+            return n * factorial(n - 1);
         }
     }
 }
+
