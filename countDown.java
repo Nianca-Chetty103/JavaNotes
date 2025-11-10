@@ -8,6 +8,8 @@ package insurancemanagemnetsystem;
  *
  * @author nianc
  */
+
+//Type of Recursion method - recursion - when the program of method calls upon itself to code.
 public class countDown {
     
     public static void main(String[] args){
@@ -28,3 +30,4 @@ public class countDown {
     }
             
 }
+
