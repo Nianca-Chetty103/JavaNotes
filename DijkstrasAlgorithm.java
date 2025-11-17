@@ -4,10 +4,7 @@
  */
 package com.mycompany.sortingalgorithms;
 import java.util.*;
-/**
- *
- * @author nianc
- */
+
 public class DijkstrasAlgorithm<T> {
  
 
@@ -132,3 +129,4 @@ public class DijkstrasAlgorithm<T> {
     }
    
 }
+
