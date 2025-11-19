@@ -1,0 +1,146 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * A generic, directed Graph (Digraph) implementation using an Adjacency List.
+ * Edges are one-way*/
+public class DirectedGraph<T>
+{
+
+    //a Map where each vertex maps to its list of OUTGOING neighbours.
+    private Map<T, LinkedList<T>> adjacencyList;
+
+    //Constructs a new, empty directed graph
+    public DirectedGraph() {
+        this.adjacencyList = new HashMap<>();
+    }
+
+    //Adds a new vertex to the graph
+    public void addVertex(T vertex) {
+        adjacencyList.putIfAbsent(vertex, new LinkedList<>());
+    }
+
+    //Adds a directed edge (a one-way "arrow") from vertex v1 to vertex v2:
+    public void addEdge(T v1, T v2) 
+    {
+        // 1. Ensure both vertices exist in the graph
+        addVertex(v1);
+        addVertex(v2);
+
+        // 2. Add the edge from v1 to v2 (v1 --> v2)
+        // We only add it if it's not already there
+        if (!adjacencyList.get(v1).contains(v2))
+        {
+            adjacencyList.get(v1).add(v2);
+        }
+        // NOTE: We DO NOT add the reverse edge (v2 -> v1)
+    }
+
+    //Removes a directed edge from v1 to v2:
+    public void removeEdge(T v1, T v2)
+    {
+        // Remove the edge v1 -> v2, if it exists
+        if (adjacencyList.containsKey(v1))
+        {
+            adjacencyList.get(v1).remove(v2);
+        }
+    }
+
+    //Removes a vertex and all its associated edges (both incoming and outgoing):
+    public void removeVertex(T vertex)
+    {
+        if (!adjacencyList.containsKey(vertex))
+	{
+            return; // Vertex not in graph, nothing to do.
+        }
+
+        // 1. Remove all OUTGOING edges from this vertex.
+        // This is easy: just remove the vertex from the map.
+        adjacencyList.remove(vertex);
+
+        // 2. Remove all INCOMING edges pointing to this vertex.
+        // We must iterate through all other vertices and check their neighbour lists.
+        for (LinkedList<T> neighbours : adjacencyList.values())
+        {
+            neighbours.remove(vertex);
+        }
+    }
+
+    //Gets a list of all neighbours that a vertex has an OUTGOING edge to:
+    public List<T> getNeighbours(T vertex)
+    {
+        return adjacencyList.getOrDefault(vertex, new LinkedList<>());
+    }
+
+    //Checks if a directed edge exists from v1 to v2:
+    public boolean hasEdge(T v1, T v2)
+    {
+        if (!adjacencyList.containsKey(v1))
+        {
+            return false;
+        }
+        return adjacencyList.get(v1).contains(v2);
+    }
+
+    //Gets a set of all vertices currently in the graph:
+    public Set<T> getAllVertices()
+    {
+        return adjacencyList.keySet();
+    }
+    
+    //method to print the entire graph:
+    public void printGraph()
+    {
+        if (adjacencyList.isEmpty())
+        {
+            System.out.println("Graph is empty.");
+            return;
+        }
+        
+        System.out.println("Graph Adjacency List (Directed):");
+        for (T vertex : adjacencyList.keySet())
+        {
+            System.out.println(vertex + " --> " + adjacencyList.get(vertex));
+        }
+    }
+
+    // ----------------- Main Method (Example Usage) -----------------
+    
+    public static void main(String[] args) 
+    {
+        // Let's model a "follow" system (like Twitter or Instagram)
+        DirectedGraph<String> followGraph = new DirectedGraph<>();
+
+        // Add users (vertices)
+        followGraph.addVertex("Alice");
+        followGraph.addVertex("Bob");
+        followGraph.addVertex("Charlie");
+
+        // Add follow relationships (edges)
+        followGraph.addEdge("Alice", "Bob");    // Alice follows Bob
+        followGraph.addEdge("Alice", "Charlie"); // Alice follows Charlie
+        followGraph.addEdge("Bob", "Charlie");   // Bob follows Charlie
+
+        // Print the graph to see its structure
+        followGraph.printGraph();
+
+        System.out.println("\n--- Testing Operations ---");
+
+        // Get neighbours (who a person follows)
+        System.out.println("Alice follows: " + followGraph.getNeighbours("Alice"));
+        System.out.println("Charlie follows: " + followGraph.getNeighbours("Charlie"));
+
+        // Test hasEdge
+        System.out.println("Does Alice follow Bob? " + followGraph.hasEdge("Alice", "Bob"));
+        System.out.println("Does Bob follow Alice? " + followGraph.hasEdge("Bob", "Alice"));
+
+        // Remove a person
+        followGraph.removeVertex("Charlie");
+        System.out.println("\nAfter removing Charlie:");
+        followGraph.printGraph();
+
+    }
+}
