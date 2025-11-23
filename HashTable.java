@@ -12,6 +12,7 @@ import java.util.LinkedList;
  *
  * @author nianc
  */
+// this is for checking / adding words to a dictionary 
 
 class HashTable {
     private LinkedList<String> [] table;
@@ -45,4 +46,5 @@ class HashTable {
         int index = hash(word);
         return table[index].contains(word);
     }
+
 }
