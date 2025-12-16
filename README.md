@@ -1,2 +1,2 @@
 # Java Notes ☕
-Fundamentals of learning about structures in Java.
+Just my java notes for learning data structures and algorithms
